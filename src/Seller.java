@@ -15,7 +15,7 @@ public class Seller {
         this.shop = shop;
     }
 
-    public synchronized Car buyCar() {
+    public Car buyCar() {
         System.out.println(Thread.currentThread().getName() + " зашел в автосалон");
         try {
             lock.lock();
@@ -39,8 +39,8 @@ public class Seller {
             try {
                 System.out.println("Производитель toyota выпустил 1 авто");
                 Thread.sleep(CAR_INPUT);
-                shop.cars.add(new Car());
                 lock.lock();
+                shop.cars.add(new Car());
                 condition.signal();
             } catch (InterruptedException e) {
                 e.printStackTrace();
